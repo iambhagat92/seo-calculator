@@ -61,7 +61,7 @@ export default function ContactPage() {
 
                 <div className="bg-card border rounded-2xl p-8 shadow-sm">
                     <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-                    <form className="space-y-4" action={() => { }}>
+                    <form className="space-y-4">
                         <div className="space-y-2">
                             <label htmlFor="name" className="text-sm font-medium">Name</label>
                             <input id="name" type="text" className="w-full p-3 rounded-lg border bg-transparent" placeholder="Your name" />
