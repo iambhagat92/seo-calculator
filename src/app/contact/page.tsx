@@ -43,20 +43,6 @@ export default function ContactPage() {
                             </a>
                         </div>
                     </div>
-
-                    <div className="flex items-start gap-4">
-                        <div className="p-3 bg-primary/10 rounded-lg text-primary">
-                            <MapPin className="w-6 h-6" />
-                        </div>
-                        <div>
-                            <h3 className="text-xl font-bold">Headquarters</h3>
-                            <p className="text-muted-foreground mt-1">
-                                CalcHub Inc.<br />
-                                Bangalore, Karnataka<br />
-                                India
-                            </p>
-                        </div>
-                    </div>
                 </div>
 
                 <div className="bg-card border rounded-2xl p-8 shadow-sm">
