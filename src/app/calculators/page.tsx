@@ -7,19 +7,20 @@ export const metadata: Metadata = {
     description: "Browse our complete directory of 37 free, high-performance calculators for Indian creators, students, and businesses.",
 };
 
-export default function CalculatorsListingPage({
+export default async function CalculatorsListingPage({
     searchParams
 }: {
-    searchParams: { category?: string; q?: string }
+    searchParams: Promise<{ category?: string; q?: string }>
 }) {
+    const params = await searchParams;
     let filteredList = calculators;
 
-    if (searchParams.category) {
-        filteredList = filteredList.filter(c => c.category === searchParams.category);
+    if (params.category) {
+        filteredList = filteredList.filter(c => c.category === params.category);
     }
 
-    if (searchParams.q) {
-        const q = searchParams.q.toLowerCase();
+    if (params.q) {
+        const q = params.q.toLowerCase();
         filteredList = filteredList.filter(c =>
             c.title.toLowerCase().includes(q) ||
             c.content.intro.toLowerCase().includes(q) ||

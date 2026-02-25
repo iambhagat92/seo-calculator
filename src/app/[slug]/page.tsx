@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
 interface PageProps {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 }
 
 // Ensure statically generated pages at build time for max SEO
@@ -15,7 +15,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-    const calc = calculators.find((c) => c.slug === params.slug);
+    const { slug } = await params;
+    const calc = calculators.find((c) => c.slug === slug);
 
     if (!calc) {
         return {
@@ -87,8 +88,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
 }
 
-export default function DynamicCalculatorPage({ params }: PageProps) {
-    const calc = calculators.find((c) => c.slug === params.slug);
+export default async function DynamicCalculatorPage({ params }: PageProps) {
+    const { slug } = await params;
+    const calc = calculators.find((c) => c.slug === slug);
 
     if (!calc) {
         notFound();
@@ -143,7 +145,7 @@ export default function DynamicCalculatorPage({ params }: PageProps) {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
             <div className="container py-10 md:py-16">
-                <CalculatorLayout calculator={calc} />
+                <CalculatorLayout calculatorId={calc.id} />
             </div>
         </>
     );

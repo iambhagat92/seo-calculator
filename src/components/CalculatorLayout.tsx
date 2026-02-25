@@ -1,17 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import { CalculatorSchema } from "@/data/calculators";
+import { calculators } from "@/data/calculators";
 import VerticalBarGraph from "./VerticalBarGraph";
 import { Info, CheckCircle2, AlertOctagon, HelpCircle } from "lucide-react";
 
 interface CalculatorLayoutProps {
-    calculator: CalculatorSchema;
+    calculatorId: string;
 }
 
-export default function CalculatorLayout({ calculator }: CalculatorLayoutProps) {
+export default function CalculatorLayout({ calculatorId }: CalculatorLayoutProps) {
+    const calculator = calculators.find(c => c.id === calculatorId);
+
     // Initialize state with default values
     const [inputs, setInputs] = useState<Record<string, number>>(() => {
+        if (!calculator) return {};
         const initial: Record<string, number> = {};
         calculator.fields.forEach(field => {
             initial[field.id] = field.defaultValue ?? 0;
@@ -27,12 +30,15 @@ export default function CalculatorLayout({ calculator }: CalculatorLayoutProps) 
     };
 
     const handleReset = () => {
+        if (!calculator) return;
         const resetValues: Record<string, number> = {};
         calculator.fields.forEach(field => {
             resetValues[field.id] = field.defaultValue ?? 0;
         });
         setInputs(resetValues);
     };
+
+    if (!calculator) return null;
 
     const result = calculator.calculate(inputs);
 
