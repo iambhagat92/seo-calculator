@@ -10,6 +10,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "SEO Calculator Hub",
   description: "A complete collection of SEO and digital economy calculators.",
+  verification: {
+    google: "l-g4wLIKrROeA-nAcZkmIL8xWnkfLB_3LQeGM6juwAo",
+  },
 };
 
 export default function RootLayout({
